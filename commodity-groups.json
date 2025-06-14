@@ -1,0 +1,252 @@
+[
+  {
+    "category_id": "001",
+    "commodity_group": "Accommodation Rentals",
+    "category": "General Services"
+  },
+  {
+    "category_id": "002",
+    "commodity_group": "Membership Fees",
+    "category": "General Services"
+  },
+  {
+    "category_id": "003",
+    "commodity_group": "Workplace Safety",
+    "category": "General Services"
+  },
+  {
+    "category_id": "004",
+    "commodity_group": "Consulting",
+    "category": "General Services"
+  },
+  {
+    "category_id": "005",
+    "commodity_group": "Financial Services",
+    "category": "General Services"
+  },
+  {
+    "category_id": "006",
+    "commodity_group": "Fleet Management",
+    "category": "General Services"
+  },
+  {
+    "category_id": "007",
+    "commodity_group": "Recruitment Services",
+    "category": "General Services"
+  },
+  {
+    "category_id": "008",
+    "commodity_group": "Professional Development",
+    "category": "General Services"  
+  },
+  {
+    "category_id": "009",
+    "commodity_group": "Miscellaneous Services",
+    "category": "General Services"
+  },
+  {
+    "category_id": "010",
+    "commodity_group": "Insurance",
+    "category": "General Services"
+  },
+  {
+    "category_id": "011",
+    "commodity_group": "Electrical Engineering",
+    "category": "Facility Management"
+  },
+  {
+    "category_id": "012",
+    "commodity_group": "Facility Management Services",
+    "category": "Facility Management"
+  },
+  {
+    "category_id": "013",
+    "commodity_group": "Security",
+    "category": "Facility Management"
+  },
+  {
+    "category_id": "014",
+    "commodity_group": "Renovations",
+    "category": "Facility Management"
+  },
+  {
+    "category_id": "015",
+    "commodity_group": "Office Equipment",
+    "category": "Facility Management"
+  },
+  {
+    "category_id": "016",
+    "commodity_group": "Energy Management",
+    "category": "Facility Management"
+  },
+  {
+    "category_id": "017",
+    "commodity_group": "Maintenance",
+    "category": "Facility Management"
+  },
+  {
+    "category_id": "018",
+    "commodity_group": "Cafeteria and Kitchenettes",
+    "category": "Facility Management"
+  },
+  {
+    "category_id": "019",
+    "commodity_group": "Cleaning",
+    "category": "Facility Management"
+  },
+  {
+    "category_id": "020",
+    "commodity_group": "Audio and Visual Production",
+    "category": "Publishing Production"
+  },
+  {
+    "category_id": "021",
+    "commodity_group": "Books/Videos/CDs",
+    "category": "Publishing Production"
+  },
+  {
+    "category_id": "022",
+    "commodity_group": "Printing Costs",
+    "category": "Publishing Production"
+  },
+  {
+    "category_id": "023",
+    "commodity_group": "Software Development for Publishing",
+    "category": "Publishing Production"
+  },
+  {
+    "category_id": "024",
+    "commodity_group": "Material Costs",
+    "category": "Publishing Production"
+  },
+  {
+    "category_id": "025",
+    "commodity_group": "Shipping for Production",
+    "category": "Publishing Production"
+  },
+  {
+    "category_id": "026",
+    "commodity_group": "Digital Product Development",
+    "category": "Publishing Production"
+  },
+  {
+    "category_id": "027",
+    "commodity_group": "Pre-production",
+    "category": "Publishing Production"
+  },
+  {
+    "category_id": "028",
+    "commodity_group": "Post-production Costs",
+    "category": "Publishing Production"
+  },
+  {
+    "category_id": "029",
+    "commodity_group": "Hardware",
+    "category": "Information Technology"
+  },
+  {
+    "category_id": "030",
+    "commodity_group": "IT Services",
+    "category": "Information Technology"
+  },
+  {
+    "category_id": "031",
+    "commodity_group": "Software",
+    "category": "Information Technology"
+  },
+  {
+    "category_id": "032",
+    "commodity_group": "Courier, Express, and Postal Services",
+    "category": "Logistics"
+  },
+  {
+    "category_id": "033",
+    "commodity_group": "Warehousing and Material Handling",
+    "category": "Logistics"
+  },
+  {
+    "category_id": "034",
+    "commodity_group": "Transportation Logistics",
+    "category": "Logistics"
+  },
+  {
+    "category_id": "035",
+    "commodity_group": "Delivery Services",
+    "category": "Logistics"
+  },
+  {
+    "category_id": "036",
+    "commodity_group": "Advertising",
+    "category": "Marketing & Advertising"
+  },
+  {
+    "category_id": "037",
+    "commodity_group": "Outdoor Advertising",
+    "category": "Marketing & Advertising"
+  },
+  {
+    "category_id": "038",
+    "commodity_group": "Marketing Agencies",
+    "category": "Marketing & Advertising"
+  },
+  {
+    "category_id": "039",
+    "commodity_group": "Direct Mail",
+    "category": "Marketing & Advertising"
+  },
+  {
+    "category_id": "040",
+    "commodity_group": "Customer Communication",
+    "category": "Marketing & Advertising"
+  },
+  {
+    "category_id": "041",
+    "commodity_group": "Online Marketing",
+    "category": "Marketing & Advertising"
+  },
+  {
+    "category_id": "042",
+    "commodity_group": "Events",
+    "category": "Marketing & Advertising"
+  },
+  {
+    "category_id": "043",
+    "commodity_group": "Promotional Materials",
+    "category": "Marketing & Advertising"
+  },
+  {
+    "category_id": "044",
+    "commodity_group": "Warehouse and Operational Equipment",
+    "category": "Production"
+  },
+  {
+    "category_id": "045",
+    "commodity_group": "Production Machinery",
+    "category": "Production"
+  },
+  {
+    "category_id": "046",
+    "commodity_group": "Spare Parts",
+    "category": "Production"
+  },
+  {
+    "category_id": "047",
+    "commodity_group": "Internal Transportation",
+    "category": "Production"
+  },
+  {
+    "category_id": "048",
+    "commodity_group": "Production Materials",
+    "category": "Production"
+  },
+  {
+    "category_id": "049",
+    "commodity_group": "Consumables",
+    "category": "Production"
+  },
+  {
+    "category_id": "050",
+    "commodity_group": "Maintenance and Repairs",
+    "category": "Production"
+  }
+] 
