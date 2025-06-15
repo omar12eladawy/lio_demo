@@ -2,7 +2,7 @@ from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
 
 from api.config import Config
-from api.prompts.extract_prompt import EXTRACT_PROMPT
+from api.prompts.prompts import EXTRACT_PROMPT
 
 
 class LLMProcessor:

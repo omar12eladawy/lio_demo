@@ -33,12 +33,14 @@ export function RequestList({ requests, onStatusChange, onDelete }: RequestListP
     const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
     const [filterStatus, setFilterStatus] = useState<string>('all');
     const [filterCategory, setFilterCategory] = useState<string>('all');
+    const [expandedRequestId, setExpandedRequestId] = useState<string | null>(null);
     const [deleteDialog, setDeleteDialog] = useState<{ isOpen: boolean; requestId: string | null; requestTitle: string }>({
         isOpen: false,
         requestId: null,
         requestTitle: ''
     });
     const [isDeleting, setIsDeleting] = useState(false);
+    const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
 
     // Filter requests based on status and category
     const filteredRequests = requests.filter(request => {
@@ -120,6 +122,16 @@ export function RequestList({ requests, onStatusChange, onDelete }: RequestListP
 
     const handleDeleteCancel = () => {
         setDeleteDialog({ isOpen: false, requestId: null, requestTitle: '' });
+    };
+
+    const toggleRowExpansion = (requestId: string) => {
+        const newExpandedRows = new Set(expandedRows);
+        if (newExpandedRows.has(requestId)) {
+            newExpandedRows.delete(requestId);
+        } else {
+            newExpandedRows.add(requestId);
+        }
+        setExpandedRows(newExpandedRows);
     };
 
     return (
@@ -241,10 +253,26 @@ export function RequestList({ requests, onStatusChange, onDelete }: RequestListP
                                 const category = getCategoryForCommodityGroup(request.commodity_group);
                                 const colors = getCategoryColors(category || '');
                                 
+                                const isExpanded = expandedRows.has(request._id!);
+                                
                                 return (
+                                <>
                                 <TableRow key={request._id} className="hover:bg-gray-50">
                                     <TableCell className="font-medium">
-                                        {request.title}
+                                        <button
+                                            onClick={() => toggleRowExpansion(request._id!)}
+                                            className="flex items-center space-x-2 text-left hover:text-indigo-600 transition-colors"
+                                        >
+                                            <span>{request.title}</span>
+                                            <svg 
+                                                className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-90' : ''}`}
+                                                fill="none" 
+                                                stroke="currentColor" 
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </button>
                                     </TableCell>
                                     <TableCell>{request.requestor_name}</TableCell>
                                     <TableCell>{request.vendor_name}</TableCell>
@@ -299,6 +327,56 @@ export function RequestList({ requests, onStatusChange, onDelete }: RequestListP
                                         </div>
                                     </TableCell>
                                 </TableRow>
+                                
+                                {/* Expandable Row for Order Lines */}
+                                {isExpanded && (
+                                    <TableRow>
+                                        <TableCell colSpan={9} className="p-0">
+                                            <div className="bg-gray-50 p-6 border-t">
+                                                <h4 className="text-lg font-semibold text-gray-900 mb-4">Order Lines</h4>
+                                                {request.order_lines && request.order_lines.length > 0 ? (
+                                                    <div className="space-y-3">
+                                                        {request.order_lines.map((line, index) => (
+                                                            <div key={index} className="bg-white p-4 rounded-lg border">
+                                                                <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+                                                                    <div>
+                                                                        <label className="text-xs font-medium text-gray-500 uppercase tracking-wider">Description</label>
+                                                                        <p className="mt-1 text-sm text-gray-900">{line.description}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label className="text-xs font-medium text-gray-500 uppercase tracking-wider">Unit Price</label>
+                                                                        <p className="mt-1 text-sm text-gray-900 font-mono">€{line.unit_price.toLocaleString()}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label className="text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</label>
+                                                                        <p className="mt-1 text-sm text-gray-900">{line.amount}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label className="text-xs font-medium text-gray-500 uppercase tracking-wider">Unit</label>
+                                                                        <p className="mt-1 text-sm text-gray-900">{line.unit}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label className="text-xs font-medium text-gray-500 uppercase tracking-wider">Total Price</label>
+                                                                        <p className="mt-1 text-sm text-gray-900 font-mono font-semibold">€{line.total_price.toLocaleString()}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        ))}
+                                                        <div className="mt-4 pt-4 border-t">
+                                                            <div className="flex justify-between items-center">
+                                                                <span className="text-sm font-medium text-gray-600">Total Request Value:</span>
+                                                                <span className="text-lg font-bold text-gray-900 font-mono">€{request.total_cost.toLocaleString()}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ) : (
+                                                    <p className="text-gray-500 italic">No order lines available</p>
+                                                )}
+                                            </div>
+                                        </TableCell>
+                                    </TableRow>
+                                )}
+                                </>
                             )})
                         )}
                     </TableBody>
