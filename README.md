@@ -1,4 +1,4 @@
-# Next.js + FastAPI Demo Project
+# Case Procurement System 
 
 ## Journey
 
