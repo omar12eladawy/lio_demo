@@ -20,6 +20,7 @@ langchain==0.3.25
 langchain-core==0.3.65
 langchain-openai==0.3.23
 langchain-text-splitters==0.3.8
+langfuse==2.58.3
 langgraph==0.4.8
 langgraph-checkpoint==2.0.26
 langgraph-prebuilt==0.2.2

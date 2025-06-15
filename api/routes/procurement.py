@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File
 from typing import List
-from langfuse import observe
+from langfuse.decorators import observe
 from api.config import Config
 from api.models.procurement import ProcurementRequest
 from api.services.document_processor import DocumentProcessor

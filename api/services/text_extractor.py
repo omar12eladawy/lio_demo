@@ -1,11 +1,10 @@
 import io
 import pdfplumber
-from typing import Dict, Callable
 
 
 class TextExtractor:
     def __init__(self):
-        self.extractors: Dict[str, Callable] = {
+        self.extractors = {
             "application/pdf": self._extract_from_pdf,
             "text/plain": self._extract_from_text,
             "application/octet-stream": self._extract_from_text,

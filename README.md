@@ -1,86 +1,129 @@
-<p align="center">
-  <a href="https://nextjs-fastapi-starter.vercel.app/">
-    <img src="https://assets.vercel.com/image/upload/v1588805858/repositories/vercel/logo.png" height="96">
-    <h3 align="center">Next.js FastAPI Starter</h3>
-  </a>
-</p>
+# Next.js + FastAPI Demo Project
 
-<p align="center">Simple Next.js + MongoDB Atlas boilerplate that uses <a href="https://fastapi.tiangolo.com/">FastAPI</a> as the API backend.</p>
+## Journey
 
-<br/>
+- **Started with Vercel MongoDB FastAPI boilerplate template** - Provided solid foundation with Next.js frontend and FastAPI backend integration
 
-## Introduction
+- **Frontend development accelerated with Claude AI assistance** - Significantly sped up component architecture, TypeScript interfaces, and Tailwind styling patterns
 
-This is a hybrid Next.js + Python app that uses Next.js as the frontend and FastAPI as the API backend. One great use case of this is to write Next.js apps that use Python AI libraries on the backend and seamleslly work with a flexible MongoDB Atlas database.
+- **MongoDB integration** - Stores both request data and commodity group types/values for classification matching
 
-## How It Works
+- **Simplified AI Setup** - Chose against complex LangGraph setup in favor of single, well-structured prompt using task/format/example pattern for faster, reliable results
 
-The Python/FastAPI server is mapped into to Next.js app under `/api/`.
+- **Prompt-based commodity extraction** - Designed prompt to extract commodity groups which then match against database entries to retrieve respective categories instead of trying to get both together. 
 
-This is implemented using [`next.config.js` rewrites](https://github.com/digitros/nextjs-fastapi/blob/main/next.config.js) to map any request to `/api/:path*` to the FastAPI API, which is hosted in the `/api` folder.
+- **LLM observability with Langfuse** - Integrated tracing and monitoring for prompt performance and annotation workflows
 
-On localhost, the rewrite will be made to the `127.0.0.1:8000` port, which is where the FastAPI server is running.
+## Installation
 
-In production, the FastAPI server is hosted as [Python serverless functions](https://vercel.com/docs/concepts/functions/serverless-functions/runtimes/python) on Vercel.
+### Prerequisites
+- Node.js 18+ and npm/pnpm
+- Python 3.12+
+- MongoDB Atlas account (or local MongoDB)
 
-## Demo
+### Setup
 
-TBD
-
-## Deploy Your Own
-
-You can clone & deploy it to Vercel with one click:
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmongodb-developer%2Fvercel-mongodb-next-fastapi-starter&env=MONGODB_ATLAS_URI)
-
-## Developing Locally
-
-
-
-## Getting Started
-
-Create your MongoDB Deployment and get your connection URI:
-- [Atlas quick start](https://www.mongodb.com/docs/atlas/getting-started/)
-
-Set the needed environment variable :
+1. **Clone and install dependencies:**
 ```bash
-MONGODB_ATLAS_URI=<your_atlas_uri>
-```
-
-If the code fails to create the Atlas Search index dynamically, use the Atlas guide to [create search index](https://www.mongodb.com/docs/atlas/atlas-search/create-index/) on `TaskDB.tasks` collection.
-
-First, install the dependencies:
-
-```bash
+# Install frontend dependencies
 npm install
 # or
-yarn
-# or
 pnpm install
+
+# Install Python dependencies (using uv - included in project)
+pip install -r requirements.txt
 ```
 
-Then, run the development server:
-
+2. **Environment variables:**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+# Create .env.local file with:
+MONGODB_ATLAS_URI=your_mongodb_connection_string
+OPENAI_API_KEY=your_openai_api_key  # if using AI features
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## How to Run
 
-The FastApi server will be running on [http://127.0.0.1:8000](http://127.0.0.1:8000) – feel free to change the port in `package.json` (you'll also need to update it in `next.config.js`).
+### Development Mode
+```bash
+pnpm run next-dev    # Frontend on http://localhost:3000
+pnpm run fastapi-dev # Backend on http://localhost:8003
+```
 
-## Learn More
+### Production Build
+```bash
+pnpm run build
+pnpm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Package Management - UV vs Pip
 
-- [MongoDB PyMongo](https://www.mongodb.com/docs/drivers/pymongo/) The official MongoDB Driver for Python.
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [FastAPI Documentation](https://fastapi.tiangolo.com/) - learn about FastAPI features and API.
-- [MongoDB for Artificial Intelligence](https://www.mongodb.com/use-cases/artificial-intelligence) - set of guides and resources to get started with GenAI and MongoDB.
+**Note:** This project uses UV instead of pip for Python package management. The original boilerplate used pip, but we've switched to UV for faster dependency resolution and better development experience.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Using UV (Recommended)
+UV is already configured and ready to use. The FastAPI development server uses UV by default:
+```bash
+# UV is used automatically when running:
+pnpm run fastapi-dev
+
+# To manually install dependencies with UV:
+uv sync
+# or
+uv pip install -r requirements.txt
+```
+
+### Using Pip (Alternative)
+If you prefer to use pip instead of UV:
+1. Install dependencies: `pip install -r requirements.txt`
+2. **Important:** You'll need to modify the `fastapi-dev` script in `package.json` from:
+   ```json
+   "fastapi-dev": "uv run python3 -m uvicorn api.index:app --reload --port 8003"
+   ```
+   to:
+   ```json
+   "fastapi-dev": "python3 -m uvicorn api.index:app --reload --port 8003"
+   ```
+
+## Frontend Summary
+
+**Tech Stack:** Next.js 14, TypeScript, Tailwind CSS, shadcn/ui, React Query, React Hook Form
+
+The frontend is built with modern React patterns and leverages:
+- **Component Architecture:** Reusable UI components using shadcn/ui design system
+- **State Management:** React Query for server state and form handling with react-hook-form
+- **Styling:** Tailwind CSS with custom component variants
+- **Type Safety:** Full TypeScript implementation with Zod validation
+
+**Note:** Frontend development was significantly accelerated with Claude AI assistance, particularly for:
+- Component structure and TypeScript interfaces
+- Tailwind styling and responsive design patterns
+- Form validation logic and error handling
+- API integration patterns with React Query
+
+## Backend Summary
+
+**Tech Stack:** FastAPI, Python 3.12, MongoDB, LangChain, OpenAI
+
+The backend provides a robust API foundation with:
+- **API Framework:** FastAPI with automatic OpenAPI documentation
+- **Database:** MongoDB integration with PyMongo driver
+- **AI Integration:** LangChain and OpenAI for document processing and AI features
+- **Document Processing:** PDF handling with pdfplumber and pypdfium2
+- **Tracing:** Langfuse integration for LLM observability and performance monitoring
+
+
+## Possible Improvements:
+
+### 🎨 **UI/UX Improvements**
+• **Dashboard with analytics** - Replace basic list view with spending charts, department breakdowns, and KPI metrics
+• **Bulk upload interface** - Drag-and-drop multiple document processing with progress tracking and batch results
+
+### 🤖 **AI/LLM Optimization** 
+• **Decomposed LLM pipeline** - Break single prompt into specialized calls (extraction → classification → validation) for better accuracy and cost control
+• **Multi-dimensional scoring** - Expand beyond total cost validation to include field completion accuracy, classification confidence, and cross-document consistency
+
+### 🚀 **Feature Enhancements**
+• **Advanced search & filtering** - Add faceted search by date range, department, vendor, status, and amount with saved filter presets  
+• **Approval workflows** - Multi-stage approval routing based on amount thresholds with email notifications and audit trails
+
+---
+

@@ -44,7 +44,7 @@ export function Sidebar() {
       }`}
     >
       <div className="flex items-center justify-between mb-8 px-2">
-        <span className={`text-2xl font-bold text-indigo-700 transition-opacity duration-200 ${collapsed ? "opacity-0 w-0" : "opacity-100 w-auto"}`}>Procurement</span>
+        <Link href="/" className={`text-2xl font-bold text-indigo-700 hover:text-indigo-800 transition-all duration-200 ${collapsed ? "opacity-0 w-0" : "opacity-100 w-auto"}`}>Procurement</Link>
         <button
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           onClick={() => setCollapsed((c) => !c)}

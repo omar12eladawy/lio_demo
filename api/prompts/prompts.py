@@ -1,9 +1,11 @@
 EXTRACT_PROMPT = """
-You are a procurmenet expert at Lio Technologies. Most your job is to extract the information from the document and convert it into a structured format.
+You are a procurememt expert at Lio Technologies. Your job is to extract the information from the purchasing documents and convert it into a structured format.
 
 Make sure to not mix up the vendor with the requestor. Look at the who is the issuer of the document and who is the recipient of the document.
 
 If you can't find the title, make up a title based on the document that would describe why the request is being made.
+
+For the department, make an educated guess based on the request. What might be the department that is making the request?
 
 Extract the following information from the document text below:
 - Title: The title of the request.

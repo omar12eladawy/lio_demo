@@ -1,11 +1,21 @@
+import json
+import os
 from typing import Dict, Any
-from langfuse import observe, get_client
+from langfuse.decorators import observe, langfuse_context
+from langfuse import Langfuse
 from api.config import Config
 from api.services.llm_processor import LLMProcessor
 from api.services.payload_validator import PayloadValidator
 from api.services.text_extractor import TextExtractor
+import dotenv
 
-lf = get_client()
+dotenv.load_dotenv(".env.local")
+
+lf = Langfuse(
+    secret_key=os.getenv("LANGFUSE_SECRET_KEY"),
+    public_key=os.getenv("LANGFUSE_PUBLIC_KEY"),
+    host="https://cloud.langfuse.com",
+)
 
 
 class DocumentProcessor:
@@ -22,23 +32,32 @@ class DocumentProcessor:
         # Step 1: Extract text
         document_text = self.text_extractor.extract(content, content_type)
 
-        lf.update_current_trace(
-            metadata={
-                "prompt_template": self.config.prompt_template,
-                "model_name": self.config.model_name,
-            }
+        langfuse_context.update_current_trace(
+            tags=["annotation_queue", "document_processing"]
         )
-
-        # Hack value -1 to trigger annotation queue
-        trace_id = lf.get_current_trace_id()
-
         if not document_text or len(document_text.strip()) < 10:
             raise ValueError("No meaningful text could be extracted")
 
         # Step 2: Process with LLM
         llm_response = self.llm_processor.process(document_text)
-
+        print(f"LLM response: {llm_response}")
         # Step 3: Validate and structure
         payload = self.validator.validate_and_clean(llm_response)
+
+        if payload.get("total_cost", 0) != json.loads(llm_response.strip()).get(
+            "total_cost", 0
+        ):
+            langfuse_context.score_current_trace(
+                name="total_cost_mismatch",
+                value=1,
+                comment="Total cost mismatch between extracted lines and actualtotal",
+            )
+        else:
+            langfuse_context.score_current_trace(
+                name="total_cost_mismatch",
+                value=0,
+                comment="""Total cost matches between extracted lines and actual total.
+                Could be false positive if dict[total_cost] is not in the document.""",
+            )
 
         return payload

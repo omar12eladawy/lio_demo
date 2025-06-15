@@ -43,7 +43,7 @@ export default function LandingPage() {
                             href="/procurement"
                             className="inline-flex items-center px-6 py-3 border border-indigo-600 text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 transition-colors"
                         >
-                            View Procurement
+                            View Requests
                         </Link>
                     </div>
                 </div>

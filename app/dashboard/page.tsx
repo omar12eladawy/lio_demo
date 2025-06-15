@@ -126,7 +126,7 @@ export default function DashboardPage() {
                 </div>
             </div>
 
-            {/* Quick Actions */}
+            {/* Quick Actions and Recent Requests */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="bg-white p-6 rounded-lg shadow-sm border">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
@@ -162,64 +162,45 @@ export default function DashboardPage() {
                     </div>
                 </div>
 
-                <div className="bg-white p-6 rounded-lg shadow-sm border">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Status Overview</h3>
-                    <div className="space-y-3">
+                <div className="bg-white rounded-lg shadow-sm border">
+                    <div className="p-6 border-b border-gray-200">
                         <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600">Open Requests</span>
-                            <Badge variant="default">{statusCounts.open}</Badge>
-                        </div>
-                        <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600">In Progress</span>
-                            <Badge variant="secondary">{statusCounts.inProgress}</Badge>
-                        </div>
-                        <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600">Closed</span>
-                            <Badge variant="outline">{statusCounts.closed}</Badge>
+                            <h3 className="text-lg font-semibold text-gray-900">Recent Requests</h3>
+                            <Link
+                                href="/procurement"
+                                className="text-sm text-indigo-600 hover:text-indigo-700"
+                            >
+                                View all →
+                            </Link>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            {/* Recent Requests */}
-            <div className="bg-white rounded-lg shadow-sm border">
-                <div className="p-6 border-b border-gray-200">
-                    <div className="flex justify-between items-center">
-                        <h2 className="text-xl font-semibold text-gray-900">Recent Requests</h2>
-                        <Link
-                            href="/procurement"
-                            className="text-sm text-indigo-600 hover:text-indigo-700"
-                        >
-                            View all →
-                        </Link>
+                    <div className="p-6">
+                        {recentRequests.length === 0 ? (
+                            <p className="text-gray-500 text-center py-8">No requests found</p>
+                        ) : (
+                            <div className="space-y-4">
+                                {recentRequests.map((request) => (
+                                    <div key={request._id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50">
+                                        <div className="flex-1">
+                                            <h3 className="font-medium text-gray-900">{request.title}</h3>
+                                            <p className="text-sm text-gray-500">
+                                                {request.vendor_name} • {request.department}
+                                            </p>
+                                        </div>
+                                        <div className="flex items-center space-x-4">
+                                            <span className="font-mono text-sm">€{request.total_cost.toLocaleString()}</span>
+                                            <Badge variant={
+                                                request.status === 'OPEN' ? 'default' :
+                                                request.status === 'IN_PROGRESS' ? 'secondary' : 'outline'
+                                            }>
+                                                {request.status.replace('_', ' ')}
+                                            </Badge>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
-                </div>
-                <div className="p-6">
-                    {recentRequests.length === 0 ? (
-                        <p className="text-gray-500 text-center py-8">No requests found</p>
-                    ) : (
-                        <div className="space-y-4">
-                            {recentRequests.map((request) => (
-                                <div key={request._id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50">
-                                    <div className="flex-1">
-                                        <h3 className="font-medium text-gray-900">{request.title}</h3>
-                                        <p className="text-sm text-gray-500">
-                                            {request.vendor_name} • {request.department}
-                                        </p>
-                                    </div>
-                                    <div className="flex items-center space-x-4">
-                                        <span className="font-mono text-sm">€{request.total_cost.toLocaleString()}</span>
-                                        <Badge variant={
-                                            request.status === 'OPEN' ? 'default' :
-                                            request.status === 'IN_PROGRESS' ? 'secondary' : 'outline'
-                                        }>
-                                            {request.status.replace('_', ' ')}
-                                        </Badge>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    )}
                 </div>
             </div>
         </div>

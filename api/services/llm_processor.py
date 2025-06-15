@@ -1,10 +1,18 @@
+import os
 from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
-from langfuse import observe, get_client
-
+from langfuse.decorators import observe
+from langfuse import Langfuse
 from api.config import Config
+import dotenv
 
-lf = get_client()
+dotenv.load_dotenv(".env.local")
+
+lf = Langfuse(
+    secret_key=os.getenv("LANGFUSE_SECRET_KEY"),
+    public_key=os.getenv("LANGFUSE_PUBLIC_KEY"),
+    host="https://cloud.langfuse.com",
+)
 
 
 class LLMProcessor:
@@ -17,14 +25,6 @@ class LLMProcessor:
         )
         self.prompt = PromptTemplate(
             input_variables=["document_text"], template=self.config.prompt_template
-        )
-        lf.create_prompt(
-            name="document_prompt",
-            prompt=self.config.prompt_template,
-            config={
-                "model": config.model_name,
-                "temperature": config.temperature,
-            },
         )
 
     @observe(name="llm_processing")
