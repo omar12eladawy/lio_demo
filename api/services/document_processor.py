@@ -43,6 +43,8 @@ class DocumentProcessor:
         print(f"LLM response: {llm_response}")
         # Step 3: Validate and structure
         payload = self.validator.validate_and_clean(llm_response)
+        print(f"Payload: {payload.get('total_cost')}")
+        print(f"LLM response: {json.loads(llm_response.strip()).get('total_cost')}")
 
         if payload.get("total_cost", 0) != json.loads(llm_response.strip()).get(
             "total_cost", 0

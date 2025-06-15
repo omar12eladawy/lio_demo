@@ -31,7 +31,11 @@ npm install
 pnpm install
 
 # Install Python dependencies (using uv - included in project)
-pip install -r requirements.txt
+uv sync
+
+# or
+uv pip install -r requirements.txt
+
 ```
 
 2. **Environment variables:**
