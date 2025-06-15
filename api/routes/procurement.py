@@ -13,7 +13,6 @@ document_processor = DocumentProcessor(Config())
 # MongoDB connection
 db_client = MongoDB.get_mongo_client()
 collection = db_client.get_collection("requests")
-print(f"Collection: {collection}")
 
 
 @router.post("/requests", response_model=ProcurementRequest)

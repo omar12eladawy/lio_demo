@@ -57,4 +57,13 @@ class PayloadValidator:
                     else:
                         order_line[field] = ""
 
+        # Recalculate total cost from order lines to ensure accuracy
+        if payload["order_lines"]:
+            calculated_total = sum(
+                line.get("total_price", 0.0) for line in payload["order_lines"]
+            )
+            payload["total_cost"] = calculated_total
+            print(f"AI extracted total_cost: {payload.get('total_cost', 0)}")
+            print(f"Recalculated total_cost: {calculated_total}")
+
         return payload

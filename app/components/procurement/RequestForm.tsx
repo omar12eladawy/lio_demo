@@ -59,11 +59,20 @@ export function RequestForm({ onSubmit, initialData, isSubmitting = false }: Req
             setValue('vat_id', initialData.vat_id || '');
             setValue('commodity_group', initialData.commodity_group || '');
             setValue('department', initialData.department || '');
-            setValue('total_cost', initialData.total_cost || 0);
             
             if (initialData.order_lines && initialData.order_lines.length > 0) {
                 setOrderLines(initialData.order_lines);
                 setValue('order_lines', initialData.order_lines);
+                
+                // Recalculate total cost from actual order lines
+                const calculatedTotal = initialData.order_lines.reduce((sum, line) => sum + line.total_price, 0);
+                setValue('total_cost', calculatedTotal);
+                
+                console.log('Document processed - Order lines:', initialData.order_lines);
+                console.log('Document processed - Original total_cost:', initialData.total_cost);
+                console.log('Document processed - Calculated total_cost:', calculatedTotal);
+            } else {
+                setValue('total_cost', initialData.total_cost || 0);
             }
         }
     }, [initialData, setValue]);
