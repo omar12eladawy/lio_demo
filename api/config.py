@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 import os
+from api.prompts.prompts import EXTRACT_PROMPT
 
 
 @dataclass
@@ -9,6 +10,7 @@ class Config:
     model_name: str = "gpt-3.5-turbo"
     temperature: float = 0
     max_text_length: int = 8000
+    prompt_template: str = EXTRACT_PROMPT
 
     # File Processing
     max_file_size_mb: int = 50

@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File
 from typing import List
+from langfuse import observe
 from api.config import Config
 from api.models.procurement import ProcurementRequest
 from api.services.document_processor import DocumentProcessor
@@ -90,6 +91,7 @@ async def delete_request(request_id: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@observe(name="api_process_document")
 @router.post("/process-document")
 async def process_document(file: UploadFile = File(...)):
     """Process a vendor offer document and extract information"""
