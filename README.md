@@ -37,8 +37,12 @@ pip install -r requirements.txt
 2. **Environment variables:**
 ```bash
 # Create .env.local file with:
-MONGODB_ATLAS_URI=your_mongodb_connection_string
-OPENAI_API_KEY=your_openai_api_key  # if using AI features
+MONGODB_ATLAS_URI=<connection-string>
+OPENAI_API_KEY=<key>
+
+LANGFUSE_SECRET_KEY=sk<key>
+LANGFUSE_PUBLIC_KEY=p<key>
+LANGFUSE_HOST=https://cloud.langfuse.com 
 ```
 
 ## How to Run
