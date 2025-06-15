@@ -9,16 +9,16 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-} from '../../../components/ui/table';
+} from '../ui/table';
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from '../../../components/ui/select';
-import { Button } from '../../../components/ui/button';
-import { Badge } from '../../../components/ui/badge';
+} from '../ui/select';
+import { Button } from '../ui/button';
+import { Badge } from '../ui/badge';
 import { getCategoryForCommodityGroup, getCategoryColors, categories } from '../../lib/utils/commodity-groups';
 import { ConfirmationDialog } from '../ui/confirmation-dialog';
 

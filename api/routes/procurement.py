@@ -3,7 +3,7 @@ from typing import List
 from api.config import Config
 from api.models.procurement import ProcurementRequest
 from api.services.document_processor import DocumentProcessor
-from lib.db import MongoDB
+from api.db import MongoDB
 from datetime import datetime
 from bson import ObjectId
 

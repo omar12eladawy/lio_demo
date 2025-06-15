@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { ProcurementRequest } from '../lib/types/procurement';
-import { Badge } from '../../components/ui/badge';
+import { Badge } from '../components/ui/badge';
+import Link from 'next/link';
 
 export default function DashboardPage() {
     const [requests, setRequests] = useState<ProcurementRequest[]>([]);
@@ -125,10 +126,73 @@ export default function DashboardPage() {
                 </div>
             </div>
 
+            {/* Quick Actions */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-white p-6 rounded-lg shadow-sm border">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+                    <div className="space-y-3">
+                        <Link
+                            href="/procurement/new"
+                            className="flex items-center p-3 rounded-lg border border-indigo-200 hover:bg-indigo-50 transition-colors"
+                        >
+                            <div className="p-2 bg-indigo-100 rounded-lg mr-3">
+                                <svg className="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
+                            </div>
+                            <div>
+                                <p className="font-medium text-gray-900">Create New Request</p>
+                                <p className="text-sm text-gray-500">Submit a new procurement request</p>
+                            </div>
+                        </Link>
+                        <Link
+                            href="/procurement"
+                            className="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+                        >
+                            <div className="p-2 bg-gray-100 rounded-lg mr-3">
+                                <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                </svg>
+                            </div>
+                            <div>
+                                <p className="font-medium text-gray-900">View All Requests</p>
+                                <p className="text-sm text-gray-500">Manage and track requests</p>
+                            </div>
+                        </Link>
+                    </div>
+                </div>
+
+                <div className="bg-white p-6 rounded-lg shadow-sm border">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Status Overview</h3>
+                    <div className="space-y-3">
+                        <div className="flex justify-between items-center">
+                            <span className="text-sm text-gray-600">Open Requests</span>
+                            <Badge variant="default">{statusCounts.open}</Badge>
+                        </div>
+                        <div className="flex justify-between items-center">
+                            <span className="text-sm text-gray-600">In Progress</span>
+                            <Badge variant="secondary">{statusCounts.inProgress}</Badge>
+                        </div>
+                        <div className="flex justify-between items-center">
+                            <span className="text-sm text-gray-600">Closed</span>
+                            <Badge variant="outline">{statusCounts.closed}</Badge>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {/* Recent Requests */}
             <div className="bg-white rounded-lg shadow-sm border">
                 <div className="p-6 border-b border-gray-200">
-                    <h2 className="text-xl font-semibold text-gray-900">Recent Requests</h2>
+                    <div className="flex justify-between items-center">
+                        <h2 className="text-xl font-semibold text-gray-900">Recent Requests</h2>
+                        <Link
+                            href="/procurement"
+                            className="text-sm text-indigo-600 hover:text-indigo-700"
+                        >
+                            View all →
+                        </Link>
+                    </div>
                 </div>
                 <div className="p-6">
                     {recentRequests.length === 0 ? (
