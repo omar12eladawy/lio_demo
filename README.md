@@ -126,12 +126,11 @@ The backend provides a robust API foundation with:
 • **Bulk upload interface** - Drag-and-drop multiple document processing with progress tracking and batch results
 
 ### 🤖 **AI/LLM Optimization** 
-• **Decomposed LLM pipeline** - Break single prompt into specialized calls (extraction → classification → validation) for better accuracy and cost control
-• **Multi-dimensional scoring** - Expand beyond total cost validation to include field completion accuracy, classification confidence, and cross-document consistency
+• **Decomposed LLM pipeline** - Experiment with breaking single prompt into specialized calls for better accuracy and cost control
+• **Multi-dimensional scoring** - Expand beyond total cost validation to include field completion accuracy, classification confidence etc..
 
 ### 🚀 **Feature Enhancements**
 • **Advanced search & filtering** - Add faceted search by date range, department, vendor, status, and amount with saved filter presets  
-• **Approval workflows** - Multi-stage approval routing based on amount thresholds with email notifications and audit trails
 
 ---
 
